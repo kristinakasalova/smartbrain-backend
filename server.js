@@ -23,33 +23,6 @@ const app = express();
 app.use(bodyParser.json()); 
 app.use(cors());
 
-/* const database = {
-    users: [
-        {
-            id:'123',
-            name:'John',
-            email:'john@gmail.com',
-            password:'cookies',
-            entries:0,
-            joined: new Date()
-        },
-        {
-            id:'124',
-            name:'Sally',
-            email:'sally@gmail.com',
-            password:'pasta',
-            entries:0,
-            joined: new Date()
-        }
-    ],
-    login:[ {
-        id: '987',
-        hash: '',
-        email: 'john@gmail.com'
-    }
-    ]
-} */
-
 app.get('/', (req, res) => {
     res.send(db.users);
 });
@@ -68,6 +41,7 @@ db.select('email', 'hash').from('login')
                 .catch(err => res.status(400).json('wrong credentials'))    
         }
     })
+    .catch(err => res.status(400).json('wrong credentials'))    
 });
 
 app.post('/register',(req,res) => {
@@ -116,29 +90,6 @@ app.put('/image', (req,res) =>{
     .then(entries => res.json(entries[0].entries))
     .catch(err => res.status(400).json('unable to get entries'));
     })
-    // let found = false;
-    // database.users.forEach(user => {
-    //     if (user.id === id) {
-    //         found = true;
-    //         user.entries++;
-    //         return res.json(user.entries);
-    //     }
-    // })
-    // if (!found) {
-    //     res.status(400).json('not found');
-    // } 
-
-
-
-// // Load hash from your password DB.
-// bcrypt.compare("bacon", hash, function(err, res) {
-//     // res == true
-// });
-// bcrypt.compare("veggies", hash, function(err, res) {
-//     // res = false
-// });
-
-
 
 app.listen(3000, () => {
     console.log('app is running on port 3000');
