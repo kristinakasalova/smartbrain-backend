@@ -9,11 +9,11 @@ const { restart } = require('nodemon');
 const db = knex({
     client: 'pg',
     connection: {
-      host : '127.0.0.1',
-      port : 3306,
-      user : 'kristina',
-      password : '123',
-      database : 'smartbrain'
+      host : 'ep-floral-snow-55675466.us-east-2.aws.neon.tech',
+      port : 5432,
+      user : 'kristinakasalova',
+      password : 'FH6DiCqYaXl4',
+      database : 'neondb'
     }
   });
 
@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.send(db.users);
+    res.send('it is working');
 });
 
 app.post('/signin', (req, res) => {
